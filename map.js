@@ -12,7 +12,6 @@ function createMap(width, height) {
 
 function drawMap(geoData, data, date, dataType) {
   //SETUP
-  console.log(dataType);
   const map = d3.select('#map');
 
   const projection = d3
@@ -32,7 +31,6 @@ function drawMap(geoData, data, date, dataType) {
     if (states.length > 0) state = states[0].state;
     d.properties = states.find((s) => s.date === date) || { state };
   });
-  console.log(geoData);
 
   //COLOR SCALE
   const colorRange = {

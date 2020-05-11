@@ -23,10 +23,14 @@ d3.queue()
     const geoData = topojson.feature(mapData, mapData.objects.states).features;
 
     const width = +d3.select('.chart-container').node().offsetWidth;
+    const height = 300;
 
     //INIT DISPLAY
     createMap(width, (width * 4) / 5);
     drawMap(geoData, data, currentDate, currentDataType);
+
+    createPie(width, height);
+    drawPie(data, currentDate, currentDataType);
 
     //UPDATE CHART WHEN INPUT CHANGE
     //RANGE INPUT FOR YEAR
@@ -36,12 +40,16 @@ d3.queue()
       .attr('value', max)
       .on('input', () => {
         currentDate = dateArr[+d3.event.target.value];
+
         drawMap(geoData, data, currentDate, currentDataType);
+        drawPie(data, currentDate, currentDataType);
       });
 
     //RADIO INPUT FOR DATA TYPE
     d3.selectAll('input[name="data-type"]').on('change', () => {
       currentDataType = d3.event.target.value;
+
       drawMap(geoData, data, currentDate, currentDataType);
+      drawPie(data, currentDate, currentDataType);
     });
   });
