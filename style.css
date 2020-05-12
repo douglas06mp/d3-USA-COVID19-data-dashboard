@@ -38,7 +38,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
 }
- 
+
 .chart-container {
   display: inline-block;
   width: 45%;
@@ -70,15 +70,15 @@ body {
   margin-left: -4px;
 }
 
-.country {
+.state {
   stroke: none;
 }
 
-.country:hover {
+.state:hover {
   cursor: pointer;
 }
 
-.country.active {
+.state.active {
   stroke: #2c3e50;
   stroke-width: 2px;
 }

@@ -15,7 +15,7 @@ d3.queue()
     dateArr = [...new Set(data.map((d) => d.date))];
     let min = 0;
     let max = dateArr.length - 1;
-    let currentDate = dateArr[88];
+    let currentDate = dateArr[max];
     let currentDataType = d3
       .select('input[name="data-type"]:checked')
       .attr('value');
@@ -31,6 +31,9 @@ d3.queue()
 
     createPie(width, height);
     drawPie(data, currentDate, currentDataType);
+
+    createLine(width, height);
+    drawLine(data, currentDataType, '');
 
     //UPDATE CHART WHEN INPUT CHANGE
     //RANGE INPUT FOR YEAR
@@ -49,7 +52,11 @@ d3.queue()
     d3.selectAll('input[name="data-type"]').on('change', () => {
       currentDataType = d3.event.target.value;
 
+      let active = d3.select('.active').data()[0].properties.state;
+      let state = active || '';
+
       drawMap(geoData, data, currentDate, currentDataType);
       drawPie(data, currentDate, currentDataType);
+      drawLine(data, currentDataType, state);
     });
   });

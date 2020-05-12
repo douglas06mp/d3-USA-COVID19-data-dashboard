@@ -56,6 +56,19 @@ function drawMap(geoData, data, date, dataType) {
     .append('path')
     .classed('state', true)
     .attr('d', path)
+    //DISPLAY LINE CHART
+    .on('click', function () {
+      let currentDataType = d3.select('input:checked').property('value');
+      let state = d3.select(this);
+      let isActive = state.classed('active');
+      let stateName = isActive ? '' : state.data()[0].properties.state;
+
+      drawLine(data, currentDataType, stateName);
+
+      d3.selectAll('.state').classed('active', false);
+      state.classed('active', !isActive);
+    })
+    //
     .merge(update)
     .transition()
     .duration(300)
