@@ -1,13 +1,17 @@
 d3.queue()
   .defer(d3.json, './data/states-10m.json')
-  .defer(d3.csv, './data/us-states.csv', (row) => {
-    return {
-      date: row.date,
-      state: row.state,
-      cases: +row.cases,
-      deaths: +row.deaths,
-    };
-  })
+  .defer(
+    d3.csv,
+    'https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv',
+    (row) => {
+      return {
+        date: row.date,
+        state: row.state,
+        cases: +row.cases,
+        deaths: +row.deaths,
+      };
+    }
+  )
   .await((err, mapData, data) => {
     if (err) throw err;
 
