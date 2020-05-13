@@ -61,12 +61,11 @@ d3.queue()
     });
 
     //TOOLTIP
-    d3.selectAll('svg').on('mousemove touchmove', updateTooltip);
+    d3.selectAll('#map, #pie').on('mousemove touchmove', updateTooltip);
 
     function updateTooltip() {
       const tooltip = d3.select('.tooltip');
       const dataType = d3.select('input:checked').property('value');
-      const date = dateArr[+d3.select('#date').property('value')];
 
       //CHECK WHICH CHART
       let target = d3.select(d3.event.target);
@@ -79,9 +78,6 @@ d3.queue()
       let data;
       //Map
       if (isState) data = target.data()[0].properties;
-      //Line
-      if (isLine) {
-      }
       //Pie
       let region = '';
       let percentage = '';
@@ -96,7 +92,7 @@ d3.queue()
 
       //POSITION
       tooltip
-        .style('opacity', +(isState || isArc || isLine))
+        .style('opacity', +(isState || isArc))
         .style('left', `${d3.event.pageX - tooltip.node().offsetWidth / 2}px`)
         .style('top', `${d3.event.pageY - tooltip.node().offsetHeight - 10}px`);
 
@@ -105,8 +101,8 @@ d3.queue()
         tooltip.html(`
           ${region}
           <p>State: ${data.state}</p>
-          <p>Cases: ${data.cases}</p>
-          <p>Deaths: ${data.deaths}</p>
+          <p>Cases: ${data.cases || 0}</p>
+          <p>Deaths: ${data.deaths || 0}</p>
           ${percentage}
         `);
       }
