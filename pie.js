@@ -30,7 +30,7 @@ function drawPie(data, date, dataType) {
 
   const path = d3
     .arc()
-    .outerRadius(+pie.attr('height') / 2 - 30)
+    .outerRadius(+pie.attr('height') / 2 - 50)
     .innerRadius(0);
 
   //COLORSCALE BY REGION

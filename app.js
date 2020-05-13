@@ -22,17 +22,20 @@ d3.queue()
 
     const geoData = topojson.feature(mapData, mapData.objects.states).features;
 
-    const width = +d3.select('.chart-container').node().offsetWidth;
-    const height = 300;
+    const mapWidth = +d3.select('.map').node().offsetWidth;
+    const mapHeight = +d3.select('.map').node().offsetHeight;
+
+    const bottomWidth = +d3.select('.pie').node().offsetWidth;
+    const bottomHeight = +d3.select('.pie').node().offsetHeight;
 
     //INIT DISPLAY
-    createMap(width, (width * 4) / 5);
+    createMap(mapWidth, mapHeight);
     drawMap(geoData, data, currentDate, currentDataType);
 
-    createPie(width, height);
+    createPie(bottomWidth, bottomHeight);
     drawPie(data, currentDate, currentDataType);
 
-    createLine(width, height);
+    createLine(bottomWidth, bottomHeight);
     drawLine(data, currentDataType, '');
 
     //UPDATE CHART WHEN INPUT CHANGE

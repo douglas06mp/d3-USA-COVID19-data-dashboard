@@ -10,9 +10,10 @@ function createLine(width, height) {
     .append('text')
     .attr('transform', 'rotate(-90)')
     .attr('x', -height / 2)
+    .attr('y', '30')
     .attr('dy', '1em')
     .style('text-anchor', 'middle')
-    .style('font-size', '1em')
+    .style('font-size', '1.2em')
     .classed('y-axis-label', true);
 
   //TITLE
@@ -21,7 +22,7 @@ function createLine(width, height) {
     .attr('x', width / 2)
     .attr('y', '1em')
     .style('text-anchor', 'middle')
-    .style('font-size', '1em')
+    .style('font-size', '1.5em')
     .classed('line-title', true);
 
   //FOCUS
@@ -124,7 +125,7 @@ function drawLine(data, dataType, state) {
     .attr('stroke-width', '3');
 
   //UPDATE TEXT
-  let yLabel = state ? `Number of ${dataType}` : '';
+  let yLabel = state ? `Number of ${capitalize(dataType)}` : '';
   d3.select('.y-axis-label').text(yLabel);
 
   let title = state
